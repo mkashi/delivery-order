@@ -1,0 +1,128 @@
+{% extends '@DeliveryOrder/base.html.twig' %}
+
+{% block description %}Flash Burger | Livraison de nuit de sandwichs et burgers halal en IdF{% endblock %}
+
+{% block body %}
+    <div id="news-header" class="bg-primary m-t-20">
+        <h1>
+            <strong>Flash Burger</strong>
+            <br/>
+            Livraison de nuit de sandwichs et burgers en Ile de France
+        </h1>
+        <img src="{{ asset('images/mighty-meaty.png') }}">
+        <a href="{{ path('order') }}" class="btn btn-primary">Commander</a>
+    </div>
+
+    <div class="container-fluid text-center p-t-50 p-b-50" id="section-main-products">
+        <h2>Dévorez vos héros préférés à dévorer en <strong>burgers</strong>!</h2>
+
+        <h3 class="c-black">Commandez, et <strong>Flash</strong> s'occupe de vous livrer tous vos plats en pleine soirée</h3>
+        <p>Parce qu'il y en a pour tous les goûts, des burgers gourmets ou wraps & sandwichs pour les plus gourmands!</p>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
+                    <div class="p-20 text-center product-presentation">
+                        <img src="{{ asset('images/chicken-beef-600x386.png') }}" alt="Burger en livraison" />
+                    </div>
+                    <a class="btn-primary btn" href="{{ path('order') }}">Commander sur le site</a>
+
+                </div>
+
+                <div class="col-md-6 animate-box" data-animate-effect="fadeInRight">
+                    <div class="p-20 text-center product-presentation">
+                        <img style="top: 45px;" src="{{ asset('images/wrap.png') }}" alt="Burger Goûrmet"/>
+                    </div>
+
+                    <a class="btn-primary btn" href="tel:{{ default_phone }}"><i class="fas fa-phone"></i> Appeler: <strong>{{ default_phone }}</strong></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-second p-t-20 container-fluid pos-rel">
+        <div class="row">
+            <div class="col-md-12" data-animate-effect="fadeInLeft">
+                <h2 class="tmp-heading text-center c-white">
+                    <strong>Des burgers et sandwichs frais et cuisinés</strong> livrés en un <strong>éclair</strong>
+                </h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row service-list">
+                    <div class="col-md-12">
+                        <div class="service animate-box" data-animate-effect="fadeInLeft">
+                            <div class="icon">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <div class="description">
+                                <h3><strong>Livraison de nuit dans toute la Seine Saint Denis (93)</strong>, et aux alentours.</h3>
+                                <p>On vous livre dans l'ensemble du 93 et des villes alentours en soirée de {{ from_hour }} à {{ to_hour }}.</p>
+                            </div>
+                        </div>
+
+                        <div class="service animate-box" data-animate-effect="fadeInLeft">
+                            <div class="icon">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <div class="description">
+                                <h3>Sandwichs, wraps, burgers frais et 100% halal</h3>
+                                <p>Tous nos plats sont préparés le jour même, frais et fait maison. L'ensemble de nos produits sont garantis halal.</p>
+                            </div>
+                        </div>
+
+                        <div class="service animate-box" data-animate-effect="fadeInLeft">
+                            <div class="icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="description">
+                                <h3>Commander très simplement par <a href="tel:{{ default_phone }}">téléphone</a> ou par <a href="{{ path('order') }}">internet</a></h3>
+                                <p>Commandez de la manière dont il vous convient, nous vous livrerons vos repas, nourritures et boissons à domicile dans tous les cas!</p>
+                            </div>
+                        </div>
+
+                        <div class="service animate-box" data-animate-effect="fadeInLeft">
+                            <div class="icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="description">
+                                <h3>Paiement à la livraison</h3>
+                                <p>Vous pouvez payer par carte, espèce ou ticket restaurant une fois votre commande livrée.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 text-center pos-init">
+                <span class="titlize c-primary" style="margin-bottom: 420px;">Flash Burger, Livre comme l'éclair!</span>
+                <img src="{{ asset('images/flash.png') }}" alt="Flash Burger" class="animate-box flash-service" data-animate-effect="fadeInRight" />
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-selection container">
+        {% include "@DeliveryOrder/order/listing_product.html.twig" %}
+    </div>
+
+    <div class="bg-primary p-40">
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="c-white text-center" style="font-size: 1.8em;">Vous avez une petite envie ? Alors appelez nous, et nous arrivons avec tous vos plats !</h4>
+                </div>
+            </div>
+            <div class="row p-b-100">
+                <div class="col-md-6 text-center">
+                    <a href="{{ path('order') }}" class="btn btn-second btn-learn arround-btn">Commander via notre site</a>
+                </div>
+
+                <div class="col-md-6 text-center">
+                    <a href="tel:{{ default_phone }}" class="btn btn-second btn-learn arround-btn">Commander par téléphone</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

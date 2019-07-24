@@ -1,0 +1,52 @@
+{% extends '@DeliveryOrder/base.html.twig' %}
+
+{% block title %}Flash Burger - Commander en ligne burgers cette nuit, pour une livraison à domicile! {% endblock %}
+{% block description %}Commandez chez Flash Burger, et faites vous livrer comme l'éclair! Une liste de super burgers à sélectionner{% endblock %}
+
+{% block body %}
+    <div id="section-main-products">
+        <div class="container">
+            <h1 class="text-center p-20">Commander en ligne pour une livraison à domicile. Burgers ou sandwichs ? faites votre choix!</h1>
+            <div>
+                <div>
+                    <p class="p-20 text-center">
+                        Tous nos types de plats disponible en livraison:
+                    </p>
+
+                    <div class="category-list">
+                        <div class="category-filter">
+                            {% for category in categories %}
+                                <a class="anchor-goto border-animated btn btn-second" href="#{{ category.id }}">{{ category.name }}</a>
+                            {% endfor %}
+                        </div>
+
+                        <hr/>
+
+                        {% include "@DeliveryOrder/order/listing_product.html.twig" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="city-listing" class="bg-second p-20">
+        <div class="container">
+            <h2 class="tmp-heading text-center">Où nous vous livrons ?</h2>
+            <p class="text-center m-b-40">
+                Voici la liste de notre secteur de livraisons, n'hésitez pas à nous contacter
+                si votre ville ne fait pas partie de celles ci.
+            </p>
+
+            {% for department in departments %}
+                <div class="col-xs-4">
+                    <h3>Livraison {{ department.name }} ({{ department.zip }})</h3>
+                    <ul>
+                        {% for city in department.cities %}
+                            <li>{{ city.name }} ({{ city.zip }})</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

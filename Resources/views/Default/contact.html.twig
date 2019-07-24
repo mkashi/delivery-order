@@ -1,0 +1,66 @@
+{% extends '@DeliveryOrder/base.html.twig' %}
+
+{% block title %}Flash Burger - Contact ou réclamations{% endblock %}
+{% block description %}Nous contacter pour votre commande, votre livraison de cette nuit? ou autres...{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row p-t-50">
+        <div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
+            <span class="heading-meta">Nous contacter pour votre commande, votre livraison de cette nuit? ou autres...</span>
+            <h1 class="tmp-heading">Nous contacter</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <p class="text-center col-md-12">
+            N'hésitez pas à nous contacter par email, téléphone ou en utilisant ce formulaire pour toutes
+            informations liées à votre commande, votre livraison ou tout autre sujet.
+        </p>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="service animate-box" data-animate-effect="fadeInLeft">
+                <div class="icon">
+                    <i class="fas fa-envelope-open-text"></i>
+                </div>
+                <div class="description">
+                    <p class="c-black">
+                        Pour des informations ou demandes autres, n'hésitez pas à nous contacter par mail
+                        <a href="mailto:{{ default_email }}">{{ default_email }}</a>.
+                    </p>
+                </div>
+            </div>
+
+            <div class="service animate-box" data-animate-effect="fadeInLeft">
+                <div class="icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <div class="description">
+                    <p class="c-black">
+                        Pour nous contacter, utilisez l'un des numéros téléphones ci-dessous.
+                        <a href="tel:{{ default_phone }}">{{ default_phone }}</a>,
+                        {% for phone in list_phones %}
+                            <a href="tel: {{ phone }}">{{ phone }}</a> {{ (not loop.last) ? ',' }}
+                        {% endfor %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="row p-b-100">
+                <div class="col-md-10 col-md-offset-1 col-md-pull-1 animate-box" data-animate-effect="fadeInLeft">
+                    {{ form_start(form, {attr: {id:'form-contact'}}) }}
+                    {{ form_widget(form) }}
+                    <div class="form-group text-center">
+                        <input type="submit" class="btn btn-primary btn-send-message" value="Envoyer un message">
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

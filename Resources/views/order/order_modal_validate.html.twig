@@ -1,0 +1,34 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title text-center">Votre commande a bien été validée</h4>
+        </div>
+        <div class="modal-body">
+            <h4 class="text-center">Récapitulatif</h4>
+
+            <table class="table-responsive table">
+                <tr>
+                    <th>Numéro de téléphone</th>
+                    <td>{{ order.address.phone }}</td>
+                </tr>
+                <tr>
+                    <th>Addresse:</th>
+                    <td>{{ order.address.city }}, {{ order.address.address }}</td>
+                </tr>
+                <tr>
+                    <th>Total de votre commande</th>
+                    <td>{{ order.total }} €</td>
+                </tr>
+            </table>
+        </div>
+
+        <p class="text-center">
+            Pour plus d'information en rapport à votre commande, n'hésitez pas à nous contacter via la page <a href="{{ path('contact') }}">contact</a>.
+        </p>
+
+        <div class="modal-footer text-center">
+            <button type="button" class="text-center btn btn-default" data-dismiss="modal">Fermer</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title text-center">Mon panier</h4>
+        </div>
+        {{ form_start(form, {attr: {id: 'order-form'}}) }}
+        <div class="modal-body">
+            <h5 class="text-center">Pour vous contacter</h5>
+
+            {{ form_row(form.address.name) }}
+
+            {{ form_row(form.address.phone) }}
+            <p class="text-center">
+                <i class="fas fa-info-circle"></i>
+                <small>Numéro sous lequel vous contacter pour votre commande.</small>
+            </p>
+
+            <hr/>
+            <h5 class="text-center">Localisation</h5>
+            {{ form_row(form.address.department, {id: 'department-id'}) }}
+            {{ form_row(form.address.city, {id: 'city-id'}) }}
+            {{ form_row(form.address.address) }}
+
+            {{ form_widget(form) }}
+
+            <hr/>
+            <h5 class="text-center">Le total de votre commande</h5>
+            <p class="text-center">
+                <a class="btn-component" href="#">
+                    <span class="total">{{ cart.total }} €</span>
+                </a>
+            </p>
+
+            {% if cart.total < 15 %}
+            <div class="alert-warning alert" role="alert">
+                <strong>Le minimum de commande est de 15€!</strong>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="pull-left btn btn-default" data-dismiss="modal">Fermer</button>
+            <button type="submit" class="btn btn-second" {% if cart.total < 15 %}disabled="disabled"{% endif %}>Valider</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>

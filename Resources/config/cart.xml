@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="delivery_order.manager.cart" class="Delivery\OrderBundle\Manager\Cart\CartManagerSession">
+            <argument id="session" type="service"></argument>
+        </service>
+
+        <service id="Delivery\OrderBundle\Manager\Cart\CartManagerSession" alias="delivery_order.manager.cart"/>
+
+        <service id="delivery_order.cart.to_order" class="Delivery\OrderBundle\Manager\Cart\CartToOrder">
+            <argument id="delivery_order.manager.cart" type="service"/>
+            <argument id="delivery_api.repository.product" type="service"></argument>
+        </service>
+
+        <service id="Delivery\OrderBundle\Manager\Cart\CartToOrder" alias="delivery_order.cart.to_order"/>
+    </services>
+</container>

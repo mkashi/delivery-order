@@ -1,0 +1,13 @@
+<div class="product-item">
+    <div class="product-info">
+        <img src="{{ product_image.getPath(product.defaultImage) | imagine_filter('product_thumb') }}" alt="modification"/>
+        <span class="price">{{ product.priceWithoutCents }}.<sup>{{ product.cents }}€</sup></span>
+        <div class="add-wrapper btn btn-primary add-product-cart" data-product-id="{{ product.id }}">
+            <a> + </a>
+        </div>
+    </div>
+
+    <span>{{ product.name }}</span>
+
+    <p>{{ product.description }}</p>
+</div>

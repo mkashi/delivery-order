@@ -1,0 +1,55 @@
+<div id="cart-wrapper" data-animate-effect="fadeInRight" class="animate-box cart-wrapper text-center {{ is_open ? 'open' : 'closed'}}">
+    <div class="basket-items">
+        <div class="basket-header">
+            <h3>Mon panier</h3>
+            <span class="basket-close">
+                <a href="javascript:void(0)">
+                    <i class="fas fa-times toggle-cart"></i>
+                </a>
+            </span>
+        </div>
+        <div class="basket-body">
+            {% if cart_manager.total < 15 %}
+            <div class="alert alert-warning" role="alert">
+                <strong>Le minimum de commande est de 15€</strong>
+            </div>
+            {% endif %}
+            <ul class="basket-list-item">
+                {% for cartItem in cart_items %}
+                    <li class="basket-item">
+                        <div class="quantity-control">
+                            <div class="increase add-product-cart" data-product-id="{{ cartItem.product.id }}">
+                                <i class="far fa-plus-square"></i>
+                            </div>
+                            <div class="quantity">{{ cartItem.quantity }}</div>
+                            <div class="decrease remove-product-cart" data-product-id="{{ cartItem.product.id }}">
+                                <i class="far fa-minus-square"></i>
+                            </div>
+                        </div>
+                        <span class="item">{{ cartItem.product.name }}</span>
+                        <span class="price">{{ cartItem.total|number_format(2, '.', ',') }} €</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="basket-overview-panel overview-visible">
+        <ul class="quote" style="display: none">
+            <li class="basket-item total">
+                <span class="item">
+                    <span class="name">
+                        <span>Total</span>
+                    </span>
+                </span>
+                <span class="price">{{ total }} €</span>
+            </li>
+        </ul>
+
+        <a class="btn-primary btn toggle-cart" href="#" id="order-btn">
+            <span class="item-count">{{ nb_item }}</span>
+            <span class="checkout ">Commander</span>
+            <span class="total">{{ total }}&nbsp;€</span>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}FlashBurger - Livraison de nuit de burgers et sandwichs halal en IdF{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{% block description %}{% endblock %}" />
+
+    <meta property="og:title" content="FlashBurger - Livraison de nuit de burgers et sandwichs halal en IdF"/>
+    <meta property="og:image" content="{{ absolute_url('/images/logo.png') }}"/>
+    <meta property="og:url" content="{{ absolute_url('/') }}"/>
+    <meta property="og:site_name" content="Saveurs Exotik"/>
+    <meta property="og:description" content="De 20h à 4h du matin! On vous livre des supers burgers et sandwichs halal pour vos combler vos supers faims ?"/>
+    <meta name="twitter:title" content="FlashBurger - Livraison de nuit de burgers et sandwichs halal en IdF" />
+    <meta name="twitter:image" content="{{ absolute_url('/images/logo.gif') }}" />
+    <meta name="twitter:url" content="{{ absolute_url('/') }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {% if app.environment == "prod" %}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-139046705-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-139046705-1');
+        </script>
+
+    {% endif %}
+
+    {# Favicon info #}
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+    <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
+
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.7.2/flexslider.min.css">
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    <script src="{{ asset("js/template/modernizr-2.6.2.min.js") }}"></script>
+
+    <!--[if lt IE 9]>
+    <script src="{{ asset("js/template/respond.min.js") }}"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+    {% block header %}
+    <header id="main-nav" class="container-fluid closed">
+        <nav role="navigation">
+            <div class="xs-action">
+                <i class="fas fa-times toggle-menu"></i>
+                <a href="{{ path('homepage') }}">
+                    <img src="{{ asset('/images/logo.gif') }}" alt="Flash Burger">
+                </a>
+            </div>
+
+            <a href="{{ path('homepage') }}" class="logo">
+                <img src="{{ asset('/images/logo.gif') }}" alt="Flash Burger">
+            </a>
+
+            {% set links = [{title: 'Accueil', path: 'homepage'}, {title: 'Commander en ligne', path: 'order'}] %}
+            <ul class="left-menu">
+                {% for link in links %}
+                    <li class="border-animated {{ app.request.attributes.get('_route') == link.path ? 'active'}}"><a href="{{ path(link.path) }}">{{ link.title }}</a></li>
+                {% endfor %}
+            </ul>
+
+            {% set links = [{title: 'Contact', path: 'contact'}] %}
+            <ul class="right-menu">
+                {% for link in links %}
+                    <li class="border-animated {{ app.request.attributes.get('_route') == link.path ? 'active'}}"><a href="{{ path(link.path) }}">{{ link.title }}</a></li>
+                {% endfor %}
+                <li class="visible-laptop">
+                    {% if hour_manager.open %}
+                    <a class="border-animated c-second" href="#">Ouvert</a>
+                    {% else %}
+                        <a class="border-animated" href="#">
+                            Fermé
+                            <small>Ouvre à {{ hour_manager.getTodayStartHour() }}</small>
+                        </a>
+                    {% endif %}
+                </li>
+            </ul>
+        </nav>
+
+        <div id="status-wrapper">
+            <div id="status-bar" class="clearfix">
+                <a class="toggle-menu">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <img src="/images/logo.gif?0.3" alt="Flash Burger" />
+                <div class="status-button">
+                    <a id="phone-top" class="status-wrapper left-menu text-center" href="tel:{{ default_phone }}">
+                        <span class="visible-laptop">Commander en ligne ou par tél:</span>
+                        <div class="phone-number">
+                            <i class="fas fa-phone"></i><span class="visible-laptop">{{ default_phone }}</span>
+                        </div>
+                    </a>
+
+                    <a id="toggle-cart" class="toggle-cart status-wrapper right-menu" href="javascript:void(0);" >
+                        <i class="fas fa-shopping-cart"></i>
+                        <small id="cart-nb-item">{{ cart_manager.nbItem }}</small>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    {% endblock %}
+
+    <div id="main-content">
+        {% block body %}{% endblock %}
+    </div>
+
+    {% block footer %}
+        <footer id="main-footer">
+            <div class="bg-primary p-20">
+                <img class="animate-box" src="{{ asset('images/logo.gif') }}" alt="Logo Flash Burger"/>
+            </div>
+
+            <div class="street bg-black text-center">
+                <img class="animate-box" src="{{ asset('images/flash_front.png') }}" alt="Flash Burger vu de face"/>
+            </div>
+        </footer>
+    {% endblock %}
+
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="order-modal"></div>
+    <div id="alerts"></div>
+
+    {% block cart %}
+        <div id="cart-container">
+            {{ render(controller('Delivery\\OrderBundle\\Controller\\CartController::renderCart')) }}
+        </div>
+    {% endblock %}
+
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Restaurant",
+      "name": "Flash Burger",
+      "acceptsReservations": false,
+      "hasMenu": "{{ absolute_url(path('order')) }}",
+      "servesCuisine": ["Plats, Burgers, Sandwichs, Philies"],
+      "currenciesAccepted": "EUR",
+      "paymentAccepted": "Carte bancaire, espèce, ticket restaurant",
+      "priceRange": "$$",
+      "areaServed": "Ile de France",
+      "logo": "{{ absolute_url(asset('images/logo.png')) }}",
+      "openingHours": "Lu,Ma,Me,Je,Ve,Sa,Di 20:00-04:00"
+    }
+    </script>
+    {% block javascripts %}
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</body>
+</html>

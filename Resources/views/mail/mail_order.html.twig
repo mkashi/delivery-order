@@ -1,0 +1,21 @@
+Nouvelle commande numéro: {{ order.id }}
+
+------
+
+Liste des produits:
+
+{% for line in order.lines %}
+    {{ line.quantity }} x {{ line.product.name }} : {{ line.total }} €
+{% endfor %}
+
+Total: {{ order.total }}
+
+------
+
+Addresse:
+
+{{ order.address.address }}, {{ order.address.city }}
+Numéro de téléphone: {{ order.address.phone }}
+
+{% set voie = order.address.address ~ " " ~  order.address.city  %}
+Lien google maps: https://www.google.fr/maps/place/{{ voie|url_encode }}

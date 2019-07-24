@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="delivery_order.form.address" class="Delivery\OrderBundle\Form\Order\AddressType">
+            <argument id="delivery_api.repository.city" type="service"></argument>
+            <argument id="delivery_api.repository.department" type="service"></argument>
+            <tag name="form.type" />
+        </service>
+    </services>
+</container>

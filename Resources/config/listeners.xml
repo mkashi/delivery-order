@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="delivery_order.event_listener.order_send_mail" class="Delivery\OrderBundle\EventListener\OrderSendMailListener">
+            <argument id="delivery_order.mailer" type="service"></argument>
+            <tag name="kernel.event_listener" event="api.order.created" method="onNewOrder"></tag>
+        </service>
+
+        <service id="delivery_order.event_listener.order_clean_cart" class="Delivery\OrderBundle\EventListener\OrderCleanCartListener">
+            <argument id="delivery_order.manager.cart"  type="service"/>
+            <tag name="kernel.event_listener" event="api.order.created" method="onNewOrder"></tag>
+        </service>
+    </services>
+</container>

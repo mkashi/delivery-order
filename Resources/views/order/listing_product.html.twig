@@ -1,0 +1,10 @@
+{% for category in categories %}
+<div class="category">
+    <h4>{{ category.name }}</h4>
+    <div class="product-list clearfix" id="{{ category.id }}">
+        {% for product in category.products %}
+            {% include "@DeliveryOrder/elements/product_item.html.twig" %}
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}
