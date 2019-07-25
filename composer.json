@@ -3,9 +3,9 @@
     "description": "Delivery Order VIEW",
     "type": "symfony-bundle",
     "license": "MIT",
-    "minimum-stability": "stable",
     "require": {
-        "php": ">=7.1"
+        "php": ">=7.1",
+        "mouradk/delivery-api": "^1.0"
     },
     "autoload": {
         "psr-4": {
