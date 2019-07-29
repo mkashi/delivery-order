@@ -1,0 +1,23 @@
+{% extends '@DeliveryOrder/Default/order.html.twig' %}
+
+{% block title %}Flash Burger - Commander en ligne burgers cette nuit livraison au {{ department }}!{% endblock %}
+{% block description %}Commandez chez Flash Burger, et faites vous livrer comme l'éclair! Une liste de super burgers à sélectionner pour le {{ department }}{% endblock %}
+
+{% block city %}
+    <div id="city-listing" class="bg-second p-20">
+        <div class="container">
+            <h2 class="tmp-heading text-center">Où nous vous livrons au {{ department }}?</h2>
+            <p class="text-center m-b-40">
+                Voici la liste de notre secteur de livraisons, n'hésitez pas à nous contacter
+                si votre ville ne fait pas partie de celles ci.
+            </p>
+
+            <h3>Livraison {{ department }}</h3>
+            <ul class="col-xs-12 list-inline">
+                {% for city in department.cities %}
+                    <li> {{ city.name }} ({{ city.zip }}) {{ loop.last ? '' : ',' }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
