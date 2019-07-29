@@ -6,29 +6,27 @@
 {% block body %}
     <div id="section-main-products">
         <div class="container">
-            <h1 class="text-center p-20">Commander en ligne pour une livraison à domicile. Burgers ou sandwichs ? faites votre choix!</h1>
+            <h1 class="text-center p-20">{% block h1title %}Commander en ligne pour une livraison à domicile. Burgers ou sandwichs ? faites votre choix!{% endblock %}</h1>
             <div>
-                <div>
-                    <p class="p-20 text-center">
-                        Tous nos types de plats disponible en livraison:
-                    </p>
-
-                    <div class="category-list">
-                        <div class="category-filter">
-                            {% for category in categories %}
-                                <a class="anchor-goto border-animated btn btn-second" href="#{{ category.id }}">{{ category.name }}</a>
-                            {% endfor %}
-                        </div>
-
-                        <hr/>
-
-                        {% include "@DeliveryOrder/order/listing_product.html.twig" %}
+                <p class="p-20 text-center">
+                    Tous nos types de plats disponible en livraison:
+                </p>
+                <div class="category-list">
+                    <div class="category-filter">
+                        {% for category in categories %}
+                            <a class="anchor-goto border-animated btn btn-second" href="#{{ category.id }}">{{ category.name }}</a>
+                        {% endfor %}
                     </div>
+
+                    <hr/>
+
+                    {% include "@DeliveryOrder/order/listing_product.html.twig" %}
                 </div>
             </div>
         </div>
     </div>
 
+    {% block city %}
     <div id="city-listing" class="bg-second p-20">
         <div class="container">
             <h2 class="tmp-heading text-center">Où nous vous livrons ?</h2>
@@ -39,7 +37,7 @@
 
             {% for department in departments %}
                 <div class="col-xs-4">
-                    <h3>Livraison {{ department.name }} ({{ department.zip }})</h3>
+                    <h3><a href="{{ path('department_order', {slug: department.slug}) }}">Livraison {{ department.name }} ({{ department.zip }})</a></h3>
                     <ul>
                         {% for city in department.cities %}
                             <li>{{ city.name }} ({{ city.zip }})</li>
@@ -49,4 +47,5 @@
             {% endfor %}
         </div>
     </div>
+    {% endblock %}
 {% endblock %}

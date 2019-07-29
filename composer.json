@@ -5,7 +5,7 @@
     "license": "MIT",
     "require": {
         "php": ">=7.1",
-        "mouradk/delivery-api": "^1.0"
+        "mouradk/delivery-api": "^1.1"
     },
     "autoload": {
         "psr-4": {
