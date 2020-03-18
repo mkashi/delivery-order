@@ -4,6 +4,7 @@ namespace Delivery\OrderBundle\Mailer;
 
 use Delivery\ApiBundle\Entity\Order\Order;
 use Delivery\OrderBundle\Domain\ContactDomain;
+use Twig\Environment;
 
 /**
  * Class Mailer
@@ -16,7 +17,7 @@ class Mailer
     private $mailer;
 
     /**
-     * @var \Twig_Environment
+     * @var Environment
      */
     private $templating;
 
@@ -39,9 +40,9 @@ class Mailer
      * Mailer constructor.
      *
      * @param \Swift_Mailer     $mailer
-     * @param \Twig_Environment $templating
+     * @param Environment $templating
      */
-    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $templating)
+    public function __construct(\Swift_Mailer $mailer, Environment $templating)
     {
         $this->mailer = $mailer;
         $this->templating = $templating;
