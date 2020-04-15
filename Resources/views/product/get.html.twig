@@ -1,0 +1,21 @@
+{% extends '@DeliveryOrder/base.html.twig' %}
+
+{% block canonical %}{{ app.request.uri }}{% endblock %}
+{% block og_canonical %}{{ app.request.uri }}{% endblock %}
+{% block twitter_canonical %}{{ app.request.uri }}{% endblock %}
+
+{% block body %}
+    <header>
+      <h1>Livraison de nuit de {{ product.name }}</h1>
+
+      Pour les listes de categories:
+
+      {% for category in categories  %}
+      <ul>
+          {% for product in category.products %}
+            <li>{{ product.name }}</li>
+          {% endfor %}
+      </ul>
+      {% endfor %}
+    </header>
+{% endblock %}

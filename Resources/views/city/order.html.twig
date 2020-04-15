@@ -1,0 +1,85 @@
+{% extends '@DeliveryOrder/Default/order.html.twig' %}
+
+{% block title %}Livraison de nuit à {{ city.name }} ({{ department.zip }})  de sandwichs et burgers halal | Chicken Night{% endblock %}
+{% block og_title %}Livraison de nuit {{ city.zip }} ({{ city.name }}) de sandwichs et burgers | Chicken Night{% endblock %}
+{% block twitter_title %}Livraison de nuit {{ city.zip }} ({{ city.name }}) de sandwichs et burgers | Chicken Night{% endblock %}
+
+{% block canonical %}{{ app.request.uri }}{% endblock %}
+{% block og_canonical %}{{ app.request.uri }}{% endblock %}
+{% block twitter_canonical %}{{ app.request.uri }}{% endblock %}
+
+{% block meta_description %}Chicken Night - livraison toute la nuit à: {{ city.zip }} ({{ city.name }}) de sandwichs et burgers halal de {{ from_hour }} a {{ to_hour }} Tel: {{ default_phone }}{% endblock %}
+{% block og_meta_description %}Chicken Night - livraison toute la nuit dans à: {{ city.zip }} ({{ city.name }}) de sandwich et burger halal de {{ from_hour }} a {{ to_hour }} Tel: {{ default_phone }}{% endblock %}
+
+{% block body %}
+<header class="main-header bg-cover" style="background-image: url({{ asset('images/background-livraison-department.jpg') }})">
+    <div class="text-center">
+        <div class="absolute-middle clearfix top-45 p-2">
+            <strong class="titlize x2 animated fadeInDown c-primary">Chicken Night</strong>
+            <h1 class="home-header-title c-white">
+                Livraison de nuit <strong>{{ city.name }}, {{ department.zip }} - </strong> burgers et sandwichs à déguster cette nuit
+            </h1>
+        </div>
+
+        <div class="absolute-bottom clearfix container">
+            <div class="row">
+                <div class="col-12 text-center p-b-20">
+                    <a href="tel:{{ default_phone }}" class="btn btn-primary btn-learn">
+                        <i class="fa fa-phone"></i> Commander par téléphone {{ default_phone }}
+                    </a>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <a href="#next-section" class="anchor-goto"><i class="fas fa-angle-down c-primary goto-next"></i></a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="bg-primary py-4" id="next-section">
+    <h2 class="text-center c-white">Une livraison au {{ department.name }} à {{ city.name }} ({{ city.zip }}) ? Commandez avec Chicken Night.</h2>
+
+    <p class="py-2 text-center">
+        Une livraison de nuit dans votre ville: {{ city.name }} - ({{ city.zip }}) | ({{ department.name }}), Chicken Night vous livre produits fast food directement chez vous cette nuit.
+        <br/>
+        <br/>
+        Commandez directement sur notre site en sélectionnant les produits ci-dessous, ou par téléphone. <br/>
+        Ouvert entre {{ from_hour }} et {{ to_hour }} tous les jours de la semaine (et {{ weekendHour }} le week-end) avec Chicken Night.<br/>
+        <br/>
+        Que ce soit pour une grosse ou petite faim, des burgers, des sandwichs frais & halal à dévorer à domicile.
+     </p>
+    <div class="col-md-12 text-center py-2">
+        <a href="tel:{{ default_phone }}" class="btn btn-primary btn-learn">Commander au {{ default_phone }}</a>
+    </div>
+</section>
+
+{% include "@DeliveryOrder/order/listing_product.html.twig" %}
+
+<section class="py-4 px-3 bg-black" id="city-listing">
+    <div class="container">
+        <h3 class="text-center">Vous souhaitez vous faire <a href="{{ path('department_order', {slug: department.slug}) }}" class="text-underline">livrer ailleur au {{ department }} ?</a></h3>
+
+        <div class="text-center">
+            <a href="{{ path('department_order', {slug: department.slug}) }}" class="c-white text-underline">Voir l'ensemble des villes où nous livrons au: {{ department }}.</a>
+        </div>
+    </div>
+</section>
+
+{% include "@DeliveryOrder/secteur/secteur_list.html.twig" %}
+
+<section class="py-4 px-3 bg-black" id="city-listing">
+    <div class="container">
+        <h3 class="text-center">Quels sont les produits fast food qui vous font le plus envies ?</h3>
+
+        <div class="text-center row">
+            {% for category in categories %}
+                <div class="col-md-3 col-sm-6">
+                    <a href="{{ path('city_category_order', {categorySlug: category.slug, department: department.slug, slug: city.slug}) }}" class="c-white text-underline">Livraison de {{ category.name }}</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

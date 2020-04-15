@@ -13,14 +13,13 @@
         <service id="delivery_order.mailer" class="Delivery\OrderBundle\Mailer\Mailer">
             <argument type="service" id="mailer" />
             <argument type="service" id="twig" />
+            <argument>%website.name%</argument>
             <call method="setEmailFrom">
                 <argument>%mail.from%</argument>
             </call>
-
             <call method="setEmailOrderTo">
                 <argument>%mail.order_to%</argument>
             </call>
-
             <call method="setEmailContactTo">
                 <argument>%mail.contact_to%</argument>
             </call>

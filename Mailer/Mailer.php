@@ -37,13 +37,19 @@ class Mailer
     private $emailOrderTo;
 
     /**
+     * @var string
+     */
+    private $website;
+
+    /**
      * Mailer constructor.
      *
      * @param \Swift_Mailer     $mailer
      * @param Environment $templating
      */
-    public function __construct(\Swift_Mailer $mailer, Environment $templating)
+    public function __construct(\Swift_Mailer $mailer, Environment $templating, $website)
     {
+        $this->website = $website;
         $this->mailer = $mailer;
         $this->templating = $templating;
     }
@@ -57,7 +63,7 @@ class Mailer
 
         $message->setFrom($this->emailFrom);
         $message->setTo($this->emailContactTo);
-        $message->setSubject('Contact depuis le site: '.$contact->getSubject());
+        $message->setSubject(sprintf('[%s] Contact: %s', $this->website, $contact->getSubject()));
 
         $html = $this->templating->render('@DeliveryOrder/mail/mail_contact.html.twig', [
             'contact' => $contact,
@@ -81,7 +87,7 @@ class Mailer
 
         $message->setFrom($this->emailFrom);
         $message->setTo($this->emailOrderTo);
-        $message->setSubject('Commande #'.$order->getId().' depuis le site à: '. $order->getAddress()->getCity());
+        $message->setSubject(sprintf('[%s] Commande #%s à: %s', $this->website, $order->getId(), $order->getAddress()->getCity()));
 
         $html = $this->templating->render('@DeliveryOrder/mail/mail_order.html.twig', [
             'order' => $order,
